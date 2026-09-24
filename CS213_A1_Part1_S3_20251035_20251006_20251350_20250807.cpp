@@ -69,7 +69,7 @@ void Darken_Lighten_filter(Image &image_to_filter)
     string Brightness_Type;
     cin>>Brightness_Type;
     cout<<'\n';
-    if (Brightness_Type == "D" || Brightness_Type == "d") Darkening_filter(image_to_filter);
-    else if (Brightness_Type == "L" || Brightness_Type == "l") Lightening_filter(image_to_filter);
+    if (Brightness_Type[0] == 'D' || Brightness_Type[0] == 'd') Darkening_filter(image_to_filter);
+    else if (Brightness_Type[0] == 'L' || Brightness_Type[0] == 'l') Lightening_filter(image_to_filter);
     else goto dark_or_light;
 }
