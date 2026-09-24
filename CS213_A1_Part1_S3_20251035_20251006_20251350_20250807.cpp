@@ -72,4 +72,39 @@ void Darken_Lighten_filter(Image &image_to_filter)
     if (Brightness_Type[0] == 'D' || Brightness_Type[0] == 'd') Darkening_filter(image_to_filter);
     else if (Brightness_Type[0] == 'L' || Brightness_Type[0] == 'l') Lightening_filter(image_to_filter);
     else goto dark_or_light;
+
+}
+
+
+
+
+void Crop_filter(Image &image_to_filter)
+{
+    cout<<"Enter Crop starting points x & y respectively: ";
+    int x,y;
+    cin>>x>>y;
+    cout<<'\n';
+    cout<<"Enter Width & height from the starting point respectively: ";
+    int w,h;
+    cin>>w>>h;
+    cout<<'\n';
+    Image cropped_image(w,h);
+    for (int i=0;i<w;i++)
+    {
+        for (int j=0;j<h;j++)
+        {
+            for (int k=0;k<3;k++) cropped_image(i,j,k)=image_to_filter(i+x,j+y,k);
+        }
+    }
+    image_to_filter=cropped_image;
+}
+
+
+
+
+int main()
+{
+    Image image_to_filter("toy1.jpg");
+    Crop_filter(image_to_filter);
+    image_to_filter.saveImage("new.png");
 }
