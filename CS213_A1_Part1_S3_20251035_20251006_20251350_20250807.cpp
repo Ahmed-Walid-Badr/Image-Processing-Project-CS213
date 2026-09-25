@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 #include "Image_Class.h"
-using namespace std;
+using namespace std;                                     // اتمنى لو حد لقى حاجة غلط مش عارفها او مش عارف يعمل فيها اي يقولي
 
 
 
-// ============= Grey_Scale: Filter 1 =============
+// ============= GreyScale: Filter 1 =============
+
 void applyGreyscale(Image& image) {
     for (int i = 0; i < image.width; ++i) {
         for (int j = 0; j < image.height; ++j) {
@@ -25,6 +26,38 @@ void applyGreyscale(Image& image) {
 }
 
 
+// =============== Black and White: Filter 2 ================
+
+void applyBlackandWhite(Image& image) {
+    for (int i=0; i<image.width; i++) {
+
+        for (int j=0; j<image.height; j++ ) {
+
+            unsigned int avg = 0;
+            unsigned int x;
+            for (int k=0; k<3; k++) {
+                avg += image(i, j, k);
+                x = image(i, j, k)>=128;
+            }
+            avg/=3;
+
+            for (int k=0; k<3;k++) {
+                image(i, j, k)=avg;
+            }
+
+            for (int k=0; k<3; k++) {
+                if (x==1) {
+                    image.setPixel(i, j, k, 255);
+                }
+                else {
+                    image.setPixel(i, j, k, 0);
+                }
+            }
+        }
+    }
+}
+
+
 // ============= Invert: Filter 3 =============
 
 void Invert_filter(Image &image_to_filter)
@@ -39,6 +72,88 @@ void Invert_filter(Image &image_to_filter)
             }
         }
     }
+}
+
+
+// ============= Rotate Filter: Filter 6 =============
+
+void applyRotation(Image &image) {
+
+    // Take the degree input from the user:
+    int degree;
+    cout << "Enter the degree of rotation (90, 180, 270):" <<'\n';
+    cin >> degree;
+
+    // Rotation 180 degree
+    if (degree == 180) {
+        for (int i=0;i<image.width;i++)
+        {
+            for (int j=0;j<image.height/2;j++)
+            {
+                int tempR = image.getPixel(i, j, 0);
+                int tempG = image.getPixel(i, j, 1);
+                int tempB = image.getPixel(i, j, 2);
+
+                for (int k=0;k<3;k++) {
+                    // الفكرة انك تطرح من ال pixel  الي بتوازيها الناحية التانية في الناحية التانية
+                    image(i, j, k) = image(image.width-1-i, image.height-1-j, k);
+                }
+
+                image(image.width-1-i, image.height-1-j, 0) = tempR;
+                image(image.width-1-i, image.height-1-j, 1) = tempG;
+                image(image.width-1-i, image.height-1-j, 2) = tempB;
+
+            }
+        }
+    }
+
+
+    else if (degree == 90) {
+        Image image2(image.height, image.width);
+
+        for (int i=0;i<image.width;i++)
+        {
+            for (int j=0;j<image.height;j++)
+            {
+
+                int new_i = image.height-1-j ;
+                int new_j = i;
+
+                for (int k=0; k<3; k++) {
+                    image2(new_i, new_j, k) = image(i, j, k);
+                }
+
+            }
+        }
+
+        image = image2;
+
+    }
+    else if (degree == 270) {
+        Image image2 (image.height, image.width);
+
+        for (int i=0 ; i<image.width; i++) {
+            for (int j=0; j<image.height; j++) {
+
+                int new_i = j;
+                int new_j = image.width-1-i;
+
+                for (int k=0; k<3; k++) {
+                    image2(new_i, new_j, k) = image(i, j, k);
+                }
+
+            }
+
+        }
+
+
+        image = image2;
+
+    }
+    else {
+        cout << "Error! please choose one of these degrees (90, 180, 270)" << '\n';
+    }
+
 }
 
 
@@ -186,11 +301,11 @@ int main() {
     Enter_Image:
     cout << "Enter the image filename - No Spaces: ";
     getline(cin, filename);
-    Image image_to_filter(filename);
+    Image image(filename);
 
-    if (image_to_filter.channels < 3) {
+    if (image.channels < 3) {
         cout << "The image must be a colored RGB image.\n";
-        goto Enter_Image;  
+        goto Enter_Image;  // نرجع للمنيو بدل ما نقفل البرنامج
     }
 
     int choice;
@@ -207,13 +322,13 @@ int main() {
 
         switch (choice) {      // كل case هنضيف ال function اللي عملناها
             case 1:
-                applyGreyscale(image_to_filter);
+                applyGreyscale(image);
                 break;
             case 2:
-                // DO: فلتر Black & White
+                applyBlackandWhite(image);
                 break;
             case 3:
-                Invert_filter(image_to_filter);
+                Invert_filter(image);
                 break;
             case 4:
                 // DO: فلتر Frame
@@ -222,10 +337,10 @@ int main() {
                 // DO: فلتر Flip
                 break;
             case 6:
-                // DO: فلتر Rotate
+                 applyRotation(image);
                 break;
             case 7:
-                Darken_Lighten_filter(image_to_filter);
+                Darken_Lighten_filter(image);
                 break;
             case 8:
                 // DO: فلتر Resize
@@ -236,11 +351,11 @@ int main() {
         }
 
 // ============ Saving Filtered Image ============
-        cout << "Enter the output image filename & Specify extension: ";
+        cout << "Enter the output image filename & Specify extension: ";  // الجزء ده خاص بكل الفلاتر محدش هيعدل عليه
         cin.ignore();
         string filtered_filename;
         getline(cin, filtered_filename);
-        if (image_to_filter.saveImage(filtered_filename)) {
+        if (image.saveImage(filtered_filename)) {
             cout << "Image saved successfully.\n";
         }
         else {
