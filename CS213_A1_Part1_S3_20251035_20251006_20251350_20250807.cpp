@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Image_Class.h"
-using namespace std;                                     // اتمنى لو حد لقى حاجة غلط مش عارفها او مش عارف يعمل فيها اي يقولي
+using namespace std;
 
 
 
@@ -21,6 +21,7 @@ void applyGreyscale(Image& image) {
             image(i, j, 0) = average;
             image(i, j, 1) = average;
             image(i, j, 2) = average;
+            // Grey is obtained when all RGB values for a pixel are equal and the degree differs according to the average obtained by ~ (R+G+B)/3
         }
     }
 }
@@ -60,7 +61,7 @@ void applyBlackandWhite(Image& image) {
 
 // ============= Invert: Filter 3 =============
 
-void Invert_filter(Image &image_to_filter)
+void Invert_filter(Image &image_to_filter) // image_to_filter is a variable created on the same memory address of image (alias to image) so different name won't matter here or in other functions
 {
     for (int i=0;i<image_to_filter.width;i++)
     {
@@ -305,7 +306,7 @@ int main() {
 
     if (image.channels < 3) {
         cout << "The image must be a colored RGB image.\n";
-        goto Enter_Image;  // نرجع للمنيو بدل ما نقفل البرنامج
+        goto Enter_Image;  // نرجع لإدخال الصورة بدل ما نقفل البرنامج
     }
 
     int choice;
@@ -318,7 +319,6 @@ int main() {
             break;
         }
 
-// لو الاختيار مش من 1 لـ 8 نرجع نطبع المنيو
 
         switch (choice) {      // كل case هنضيف ال function اللي عملناها
             case 1:
@@ -347,7 +347,7 @@ int main() {
                 break;
             default:
                 cout << "Invalid choice! Enter a number from 0 to 8.\n";
-                continue; // نرجع للمنيو بدل ما نقفل البرنامج
+                continue; // لو الاختيار مش من 1 لـ 8 نرجع نطبع المنيو بدل ما نقفل ال برنامج
         }
 
 // ============ Saving Filtered Image ============
