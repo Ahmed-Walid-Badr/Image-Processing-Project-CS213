@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Image_Class.h"
-using namespace std;                                     // اتمنى لو حد لقى حاجة غلط مش عارفها او مش عارف يعمل فيها اي يقولي
+using namespace std;
 
 
 
@@ -181,7 +181,7 @@ void Menu() {
 }
 
 int main() {
-    // تحميل الصورة
+// ============ Inputting Image File ============
     string filename;
     Enter_Image:
     cout << "Enter the image filename - No Spaces: ";
@@ -190,7 +190,7 @@ int main() {
 
     if (image_to_filter.channels < 3) {
         cout << "The image must be a colored RGB image.\n";
-        goto Enter_Image;  // نرجع للمنيو بدل ما نقفل البرنامج
+        goto Enter_Image;  
     }
 
     int choice;
@@ -232,11 +232,11 @@ int main() {
                 break;
             default:
                 cout << "Invalid choice! Enter a number from 0 to 8.\n";
-                continue;
+                continue; // نرجع للمنيو بدل ما نقفل البرنامج
         }
 
-// حفظ الصورة (بعد أي فلتر)
-        cout << "Enter the output image filename & Specify extension: ";  // الجزء ده خاص بكل الفلاتر محدش هيعدل عليه لحد السطر 116
+// ============ Saving Filtered Image ============
+        cout << "Enter the output image filename & Specify extension: ";
         cin.ignore();
         string filtered_filename;
         getline(cin, filtered_filename);
