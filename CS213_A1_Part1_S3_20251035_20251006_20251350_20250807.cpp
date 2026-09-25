@@ -1,16 +1,15 @@
-//Note: The iteration of the image's pixels is vertical so each row is passed by then we go to the other column
-//      i.e. The image pixels are in a reversed array
+//                 ================================= Notes =================================
 
-//Since goto is used (Arbitrary jumps in code occur) ----> Not Structured Programming
+// Note: The iteration of the image's pixels is vertical so each row is passed by then we go to the other column
+//       i.e. The image pixels are in a reversed array
+//
+// Note: Since goto is used (Arbitrary jumps in code occur) ----> Not Structured Programming
 
 
+//                 ================================= Filters =================================
 
-
-
-#include "Image_Class.h"
-#include<string>
-using namespace std;
-
+// Exclaimer: This version of file IS NOT a proper executable
+//            and is stripped of any functions or headers but the filter functions
 
 void Invert_filter(Image &image_to_filter)
 {
@@ -146,14 +145,4 @@ void Purple_Filter(Image &image_to_filter)
             image_to_filter(i,j,1)=0; //Purple is the combination of Red and Blue so keep Green zero and the degrees of purple would form
         }
     }
-}
-
-
-
-
-int main()
-{
-    Image image_to_filter("luffy.jpg");
-    Crop_filter(image_to_filter);
-    image_to_filter.saveImage("new.jpg");
 }
