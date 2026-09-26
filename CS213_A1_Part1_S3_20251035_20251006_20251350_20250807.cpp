@@ -21,7 +21,6 @@ void applyGreyscale(Image& image) {
             image(i, j, 0) = average;
             image(i, j, 1) = average;
             image(i, j, 2) = average;
-            // Grey is obtained when all RGB values for a pixel are equal and the degree differs according to the average obtained by ~ (R+G+B)/3
         }
     }
 }
@@ -61,7 +60,7 @@ void applyBlackandWhite(Image& image) {
 
 // ============= Invert: Filter 3 =============
 
-void Invert_filter(Image &image_to_filter) // image_to_filter is a variable created on the same memory address of image (alias to image) so different name won't matter here or in other functions
+void Invert_filter(Image &image_to_filter)
 {
     for (int i=0;i<image_to_filter.width;i++)
     {
@@ -69,7 +68,7 @@ void Invert_filter(Image &image_to_filter) // image_to_filter is a variable crea
         {
             for (int k=0;k<3;k++)
             {
-                image_to_filter(i,j,k)=255-image_to_filter(i,j,k); //Inverting colors is getting their 255's complement
+                image_to_filter(i,j,k)=255-image_to_filter(i,j,k);
             }
         }
     }
@@ -110,12 +109,11 @@ void applyFlip(Image &image) {
 
 void applyRotation(Image &image) {
 
-    // Take the degree input from the user:
+    
     int degree;
     cout << "Enter the degree of rotation (90, 180, 270):" <<'\n';
     cin >> degree;
 
-    // Rotation 180 degree
     if (degree == 180) {
         for (int i=0;i<image.width;i++)
         {
@@ -126,7 +124,6 @@ void applyRotation(Image &image) {
                 int tempB = image.getPixel(i, j, 2);
 
                 for (int k=0;k<3;k++) {
-                    // الفكرة انك تطرح من ال pixel  الي بتوازيها الناحية التانية في الناحية التانية
                     image(i, j, k) = image(image.width-1-i, image.height-1-j, k);
                 }
 
@@ -203,8 +200,7 @@ void Darkening_filter(Image &image_to_filter)
         {
             for (int k=0;k<3;k++)
             {
-                image_to_filter(i,j,k)*=1-(level/100.0f);//Decrease intensity of color, and so brightness of pixel, by [level%] times
-                //100.0f---> 100 treated as float, to save memory & keep precision during the arithmetic operations
+                image_to_filter(i,j,k)*=1-(level/100.0f);
             }
         }
     }
@@ -224,10 +220,8 @@ void Lightening_filter(Image &image_to_filter)
         {
             for (int k=0;k<3;k++)
             {
-                float changes_to_lighten=image_to_filter(i,j,k)*(1+(level/100.0f)); //Increase intensity of colors, and so brightness of pixel, by [level%] times
-                //100.0f---> 100 treated as float, and float to save memory & keep precision during the arithmetic operations
+                float changes_to_lighten=image_to_filter(i,j,k)*(1+(level/100.0f));
                 image_to_filter(i,j,k)=min(255.0f,changes_to_lighten);
-                // the maximum possible value for an unsigned char is 255
             }
         }
     }
