@@ -249,67 +249,9 @@ void Darken_Lighten_filter(Image &image_to_filter)
 }
 
 
-//============== Filter 9 : merge images =====
 
 
-// ============= Crop: Filter 11 =============
 
-// void Crop_filter(Image &image_to_filter)
-// {
-//     cout<<"Enter Crop starting point (x,y) respectively: ";
-//     starting_point:
-//     int x,y;
-//     cin>>x>>y;
-//     cout<<'\n';
-//     if (x<=0 || y<=0 || x > image_to_filter.width || y > image_to_filter.height)
-//     {
-//         cout<<"Enter valid starting coordinate: ";
-//         goto starting_point;
-//     }
-//
-//     cout<<"Enter the width & height of the rectangle to crop: ";
-//     cropping_rectangle:
-//     int w,h;
-//     cin>>w>>h;
-//     cout<<'\n';
-//     if (w<=0 || h<=0) // w=0 & h=0 means there is no pixels ---> no image
-//     {
-//         cout<<"Enter valid width and height: ";
-//         goto cropping_rectangle;
-//     }
-//     if (x+(w-1) > image_to_filter.width) // We have the width w = (pixel x) + (w-1 pixels)
-//     {
-//         w=image_to_filter.width-x; // [---------x--------------TotalWidth-----w] so make w the distance between x & TotalWidth
-//     }
-//     if (y+(h-1) > image_to_filter.height) // We have the height h = (pixel y) + (h-1 pixels)
-//     {
-//         h=image_to_filter.height-y; // [------y---------TotalHeight----h] so make h the distance between y & TotalHeight
-//     }
-//
-//
-//     Image cropped_image(w,h);
-//     for (int i=x;i<x+w;i++) // x here is 1 based
-//     {
-//         for (int j=y;j<y+h;j++) // y here is 1 based
-//         {
-//             for (int k=0;k<3;k++) cropped_image(i-x,j-y,k)=image_to_filter(i-1,j-1,k);
-//         }
-//     }
-//     image_to_filter=cropped_image;
-// }
-
-
-// ============= Purple: Filter 15 =============
-
-// void Purple_Filter(Image &image_to_filter) {
-//     for (int i=0;i<image_to_filter.width;i++)
-//     {
-//         for (int j=0;j<image_to_filter.height;j++)
-//         {
-//             image_to_filter(i,j,1)=0; //Purple is the combination of Red and Blue so keep Green zero and the degrees of purple would form
-//         }
-//     }
-// }
 
 
 // ============ Menu ============
@@ -339,11 +281,11 @@ int main() {
 
     if (image.channels < 3) {
         cout << "The image must be a colored RGB image.\n";
-        goto Enter_Image;  // نرجع لإدخال الصورة بدل ما نقفل البرنامج
+        goto Enter_Image;
     }
 
     int choice;
-    while (true) {      // عملناها عشان الدكتور قال كل ما نقفل ال menu comes again
+    while (true) {
         Menu();
         cout << "Enter your choice: ";
         cin >> choice;
@@ -353,7 +295,7 @@ int main() {
         }
 
 
-        switch (choice) {      // كل case هنضيف ال function اللي عملناها
+        switch (choice) {
             case 1:
                 applyGreyscale(image);
                 break;
@@ -380,11 +322,11 @@ int main() {
                 break;
             default:
                 cout << "Invalid choice! Enter a number from 0 to 8.\n";
-                continue; // لو الاختيار مش من 1 لـ 8 نرجع نطبع المنيو بدل ما نقفل ال برنامج
+                continue;
         }
 
 // ============ Saving Filtered Image ============
-        cout << "Enter the output image filename & Specify extension: ";  // الجزء ده خاص بكل الفلاتر محدش هيعدل عليه
+        cout << "Enter the output image filename & Specify extension: ";
         cin.ignore();
         string filtered_filename;
         getline(cin, filtered_filename);
