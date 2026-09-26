@@ -74,6 +74,7 @@ void Invert_filter(Image &image_to_filter) // image_to_filter is a variable crea
         }
     }
 }
+<<<<<<< HEAD
 // ============= Frame: Filter 4 =============
 
 
@@ -106,6 +107,10 @@ void applyFlip(Image &image) {
     }
 }
 
+=======
+
+
+>>>>>>> 215df28b7c8e17698621dfa843b842e9ecf84c90
 // ============= Rotate Filter: Filter 6 =============
 
 void applyRotation(Image &image) {
@@ -249,9 +254,12 @@ void Darken_Lighten_filter(Image &image_to_filter)
 }
 
 
+<<<<<<< HEAD
 //============== Filter 9 : merge images =====
 
 
+=======
+>>>>>>> 215df28b7c8e17698621dfa843b842e9ecf84c90
 // ============= Crop: Filter 11 =============
 
 // void Crop_filter(Image &image_to_filter)
@@ -367,7 +375,11 @@ int main() {
                 // DO: فلتر Frame
                 break;
             case 5:
+<<<<<<< HEAD
                 applyFlip(image);
+=======
+                // DO: فلتر Flip
+>>>>>>> 215df28b7c8e17698621dfa843b842e9ecf84c90
                 break;
             case 6:
                  applyRotation(image);
