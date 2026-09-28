@@ -1,3 +1,34 @@
+
+/*
+Project Discription:
+This project was required by Dr.Mohammed EL-Ramly for assignment one for Object Oriented Programming course (CS213).
+It is for image processing which the user can upload any image using its file name with extensions like :(.jpg, .bmp, .png, ....etc)
+and the user can save the image filtered with a customized file name and extension.
+The available filters are:
+1 --> Greyscale
+2 --> Black & White
+3 --> Invert Image
+4 --> Frame
+5 --> Flip
+6 --> Rotate
+7 --> Darken / Lighten
+8 --> Resize
+
+This project is made by:
+Mahmoud Waleed Saad => ID:20250807 => Filters 1, 5
+
+Ahmed Ismail Omran => ID:20251006 => Filters 2, 6
+
+Ahmed Walid Badr => ID:20251035 => Filters 3, 7
+
+Mohammed Mokhtar Mohammed => ID:20251350 => Filters 4, 8
+
+*/
+
+
+
+
+
 #include <iostream>
 #include <string>
 #include "Image_Class.h"
@@ -424,7 +455,7 @@ int main() {
                 Darken_Lighten_filter(image);
                 break;
             case 8:
-                // DO: فلتر Resize
+                resizeFilter(image);
                 break;
             default:
                 cout << "Invalid choice! Enter a number from 0 to 8.\n";
