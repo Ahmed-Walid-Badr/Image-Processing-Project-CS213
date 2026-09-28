@@ -4,7 +4,6 @@
 using namespace std;
 
 
-
 // ============= GreyScale: Filter 1 =============
 
 void applyGreyscale(Image& image) {
@@ -75,10 +74,90 @@ void Invert_filter(Image &image_to_filter)
 }
 // ============= Frame: Filter 4 =============
 
+void addSimpleFrame(Image& img) {
+    int thickness;
+    cout << "Enter frame thickness: ";
+    cin >> thickness;
 
+    int r, g, b;
+    cin >> r >> g >> b;
 
+    for (int i = 0; i < img.width; ++i) {
+        for (int j = 0; j < img.height; ++j) {
+            
+            if (i < thickness || i >= img.width - thickness || 
+                j < thickness || j >= img.height - thickness) {
+                
+                img(i, j, 0) = r;
+                img(i, j, 1) = g;
+                img(i, j, 2) = b;
+            }
+        }
+    }
+}
+
+void addFancyFrame(Image& img) {
+    int thickness;
+    cout << "Enter frame thickness: ";
+    cin >> thickness;
+
+    int r, g, b;
+    cin >> r >> g >> b;
+
+    int gap = thickness / 2;        
+    int innerThickness = 2;         
+
+    for (int i = 0; i < img.width; ++i) {
+        for (int j = 0; j < img.height; ++j) {
+             
+              if (i < thickness || i >= img.width - thickness || 
+                j < thickness || j >= img.height - thickness) {
+                
+                img(i, j, 0) = r;
+                img(i, j, 1) = g;
+                img(i, j, 2) = b;
+            }
+            
+            int start = thickness + gap;
+            int endW = img.width - (thickness + gap);
+            int endH = img.height - (thickness + gap);
+
+            if ((i >= start && i < start + innerThickness) || (i < endW && i >= endW - innerThickness) ||
+                (j >= start && j < start + innerThickness) || (j < endH && j >= endH - innerThickness)) {
+                
+                if (i >= start && i < endW && j >= start && j < endH) {
+                    img(i, j, 0) = 255;
+                    img(i, j, 1) = 255;
+                    img(i, j, 2) = 255;
+                }
+            }
+        }
+    }
+}
+
+void Frame_Filter(Image &img)
+{
+    cout << "Choose Frame Type:" <<'\n' ;
+    cout << "1. Simple Frame" << '\n' ;
+    cout << "2. Fancy/Decorative Frame" << '\n' ;
+    cout << "Enter choice (1 or 2): ";
+
+    Frame_Choice:
+    int choice;
+    cin >> choice;
+
+    if (choice == 1) {
+        addSimpleFrame(img);
+    } else if (choice == 2) {
+        addFancyFrame(img);
+    } else {
+        cout << "Invalid choice!" << '\n' ;
+        goto Frame_Choice;
+    }
+}
 
 // ============= Flip: Filter 5 =============
+
 void applyFlip(Image &image) {
     int flip_choice;
     cout << "Enter 1 for horizontal flip or 2 for vertical flip: ";
@@ -243,12 +322,43 @@ void Darken_Lighten_filter(Image &image_to_filter)
 }
 
 
+// ============ Resize: Filter 8 ============
 
+void resizeFilter(Image& image) {
+    int Width, Height;
+    cout << "Enter new width: ";
+    cin >> Width;
+    cout << "Enter new height: ";
+    cin >> Height;
+
+    if (Width <= 0 || Height <= 0) {
+        cout << "Fail!" << endl;
+        return;
+    }
+
+    Image resizedImage(Width, Height);
+
+    for (int y = 0; y < Height; y++) {
+        for (int x = 0; x < Width; x++) {
+            
+            int oldX = x * image.width / Width;
+            int oldY = y * image.height / Height;
+
+            resizedImage(x, y, 0) = image(oldX, oldY, 0);
+            resizedImage(x, y, 1) = image(oldX, oldY, 1);
+            resizedImage(x, y, 2) = image(oldX, oldY, 2);
+        }
+    }
+
+    image = resizedImage;
+    cout << "Image resized successfully!" << endl;
+}
 
 
 
 
 // ============ Menu ============
+
 void Menu() {
     cout << "========================================\n";
     cout << "         Image Filters Menu            \n";
@@ -267,6 +377,7 @@ void Menu() {
 
 int main() {
 // ============ Inputting Image File ============
+    
     string filename;
     Enter_Image:
     cout << "Enter the image filename - No Spaces: ";
@@ -277,7 +388,8 @@ int main() {
         cout << "The image must be a colored RGB image.\n";
         goto Enter_Image;
     }
-
+// ============ Selecting Filter ============
+    
     int choice;
     while (true) {
         Menu();
@@ -300,7 +412,7 @@ int main() {
                 Invert_filter(image);
                 break;
             case 4:
-                // DO: فلتر Frame
+                Frame_Filter(image);
                 break;
             case 5:
                 applyFlip(image);
@@ -320,6 +432,7 @@ int main() {
         }
 
 // ============ Saving Filtered Image ============
+        
         cout << "Enter the output image filename & Specify extension: ";
         cin.ignore();
         string filtered_filename;
