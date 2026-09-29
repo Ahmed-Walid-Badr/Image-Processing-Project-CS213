@@ -14,6 +14,7 @@ The available filters are:
 7 --> Darken / Lighten
 8 --> Resize
 
+=========================================================
 This project is made by:
 Mahmoud Waleed Saad => ID:20250807 => Filters 1, 5
 
@@ -22,6 +23,10 @@ Ahmed Ismail Omran => ID:20251006 => Filters 2, 6
 Ahmed Walid Badr => ID:20251035 => Filters 3, 7
 
 Mohammed Mokhtar Mohammed => ID:20251350 => Filters 4, 8
+==========================================================
+
+Section name: Monday Library lab S15, S16
+============================================
 
 */
 
