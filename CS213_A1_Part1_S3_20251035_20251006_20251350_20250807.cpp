@@ -25,7 +25,7 @@ Ahmed Walid Badr => ID:20251035 => Filters 3, 7
 Mohammed Mokhtar Mohammed => ID:20251350 => Filters 4, 8
 ==========================================================
 
-Section name: Monday Library lab S15, S16
+Section name: Monday Library lab S15
 ============================================
 
 */
