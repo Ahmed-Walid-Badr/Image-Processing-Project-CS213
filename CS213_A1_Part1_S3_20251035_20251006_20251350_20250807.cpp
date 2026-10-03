@@ -1,13 +1,199 @@
+/*
+
+▄▄▄     ▄▄▄  ▄▄▄▄▄▄▄▄▄ ▄▄▄        ▄▄▄         ▄▄▄▄▄▄▄▄▄ 
+███ ░░░ ███ ████▒      ███ ░░░░░░ ███ ░░░░░░ ████▒   ███
+███ ░░░ ███ ███▓░ ░░░  ███ ░░░░░░ ███ ░░░░░░ ███▓░ ░ ███
+▓██     ▓██ ▓██▒       ▓██ ░░░░░░ ▓██ ░░░░░░ ▓██▒  ░ ▓██
+▒▓█▓▒░▒▓▒▓█ ▒▓█░█░▒▓█  ▒▓█ ░░░░░░ ▒▓█ ░░░░░░ ▒▓█░ ░░ ▒▓█
+░▒▓     ░▒▓ ░▒▓        ░▒▓ ░░░░░░ ░▒▓ ░░░░░░ ░▒▓  ░░ ░▒▓
+█░▒ ░░░ █░▒ █░▒ ░░░░░░ █░▒ ░░░░░░ █░▒ ░░░░░░ █░▒ ░░░ █░▒
+░█░ ░░░ ░█░ ░█░ ░░░░░░ ░█░ ░░░░░░ ░█░ ░░░░░░ ░█░ ░░░ ░█░
+▒░█ ░░░ ▒░█ ▒░█        ▒░█        ▒░█        ▒░█     ▒░█
+▀▀▀     ▀▀▀  ▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀ 
+==========================================================================================================
+==========================================================================================================
+
+▒▒ ▒▒▄ ▄▒▒ ▄▒▒▒▒▄   ▄▒▒▒ ▄▒▒▒▒▒ ▄▒▀▀▒▒      ▄▒▒▒▒▒ ▒▒ ▒▒    ▒▒▒▒▒▒ ▄▒▒▒▒▒ ▒▒▀▒▒▄ ▄▒▀▀▒▒
+▓▓ ▓▓▓▓▓▓▓ ▓▓  ▓▓ ▄▓▀ ▓▓ ▓▓  ▓▓ ▓▓  ▀▀      ▓▓  ▓▓ ▓▓ ▓▓      ▓▓   ▓▓  ▓▓ ▓▓  ▓▓ ▓▓  ▀▀
+▀▀ ▀▀┘▀┘▀▀ ▀▀ ┘▀▀ ▀▀└└▀▀ ▀▀┘┘┘  ▀▀▀         ▀▀┘┘   ▀▀ ▀▀┘┘┘ ┘┘▀▀┘┘ ▀▀┘┘┘  ▀▀▀▀▀  ▀▀▀   
+▓▓ ▓▓   ▓▓ ▓▓▀▀▓▓ ▓▌ ▀▓▓ ▓▓▀▀    ▀▀▀▓▄      ▓▓▀▀   ▓▓ ▓▓      ▓▓   ▓▓▀▀   ▓▓  ▓▓  ▀▀▀▓▄
+▒▒ ▒▒   ▒▒ ▒▒  ▒▒ ▀▒▄ ▒▒ ▒▒  ▒▒ ▄▄  ▒▒      ▒▒     ▒▒ ▒▒      ▒▒   ▒▒  ▒▒ ▒▒  ▒▒ ▄▄  ▒▒
+░░ ░░   ░░ ░░  ░░   ▀░░░ ▀░░░░░ ░░▄▄░▀      ░░     ░░ ░░░░░   ░░   ▀░░░░░ ░░  ░░ ░░▄▄░▀
+============================================================================================================
+============================================================================================================
+ ▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄ ▄▄▄        ▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄    ▄▄▄▄▄▄▄▄▄▄     
+████▒       ███  ███ ░░░░░░   ▓███▓   ████▒      ████▒  ▀██  ████▒           
+███▓░ ░░░░  ███  ███ ░░░░░░ ░ ▒███▒ ░ ███▓░ ░░░  ███▓░ ░  ██ ▓██▓░ ░░░░░     
+▓██▒        ▓██  ▓██ ░░░░░░ ░ ░▓██░ ░ ▓██▒       ▓██▒ ░░  ██ ▒▓█▒      ░     
+▒▓█░█░▒▓█   ▒▓█  ▒▓█ ░░░░░░ ░  ▒▓█  ░ ▒▓█░█░▒▓█  ▒▓█░   ▄██  ▀▒▓▒▓█▓▒░▄      
+░▒▓         ░▒▓  ░▒▓ ░░░░░░ ░░ ░▒▓ ░░ ░▒▓        ░▒▓ ▀▀▀██▄         ▀░▒▓     
+█░▒ ░░░░░░  █░▒  █░▒ ░░░░░░ ░░ █░▒ ░░ █░▒ ░░░░░░ █░▒ ░░  ▀██ ░░░░░  ▒▒▓█     
+░█░ ░░░░░░  ░█░  ░█░ ░░░░░░ ░░ ░█░ ░░ ░█░ ░░░░░░ ░█░ ░░░░ █▓ ░░░░░ ░▓▓██     
+▒░█ ░░░░░░  ▒░█  ▒░█        ░░ ▒░█ ░░ ▒░█        ▒░█ ░░░░ ▓▒       ▒████     
+▀▀▀        ▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀    ▀▀▀     ▀▀▀▀▀▀▀▀▀ ▀▀▀      ▒░ ▀▀▀▀▀▀▀▀▀▀      
+ ▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄         ▄▄▄▄▄   ▄▄▄▄▄   ▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄   ▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄    ▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄    ▄▄▄▄▄▄▄▄▄▄
+████▒   ███ ████▒   ███ ████▒   ▀█▄      ███▀██▀▄▀██▀███ ████▒      ███▀██▀▄▀██▀███ ████▒   ▀█▄ ████▒      ████▒  ▀██  ████▒      
+███▓░ ░ ███ ███▓░ ░ ███ ███▓░ ░░ ▓▓      ███▓▀▄███▄▀▓███ ███▓░ ░░░  ███▓▀▄███▄▀▓███ ███▓░ ░░ ▓▓ ███▓░ ░░░  ███▓░ ░  ██ ▓██▓░ ░░░░░
+▓██▒    ▓██ ▓██▒  ░ ▓██ ▓██▒  ░░ ▒▒      ▓██▒  ▀█▀  ▒▓██ ▓██▒       ▓██▒  ▀█▀  ▒▓██ ▓██▒  ░░ ▒▒ ▓██▒       ▓██▒ ░░  ██ ▒▓█▒      ░
+▒▓█▓▒░▒▓▒▓█ ▒▓█░ ░░ ▒▓█ ▒▓█░ ░░░ ░░      ▒▓█░ ░ ▓ ░ ░▒▓█ ▒▓█░█░▒▓█  ▒▓█░ ░ ▓ ░ ░▒▓█ ▒▓█░▄▄▄▄▄▄▀ ▒▓█░█░▒▓█  ▒▓█░   ▄██  ▀▒▓▒▓█▓▒░▄ 
+░▒▓     ░▒▓ ░▒▓  ░░ ░▒▓ ░▒▓  ░░░ ░▒      ░▒▓  ░ ▒ ░  ░▒▓ ░▒▓        ░▒▓  ░ ▒ ░  ░▒▓ ░▒▓      ▀▀ ░▒▓        ░▒▓ ▀▀▀██▄         ▀░▒▓
+█░▒ ░░░ █░▒ █░▒ ░░░ █░▒ █░▒ ░░░░ ▒▓      █░▒ ░░ ░ ░░ █░▒ █░▒ ░░░░░░ █░▒ ░░ ░ ░░ █░▒ █░▒ ░░░░ ▒▓ █░▒ ░░░░░░ █░▒ ░░  ▀██ ░░░░░  ▒▒▓█
+░█░ ░░░ ░█░ ░█░ ░░░ ░█░ ░█░ ░░░░ ▓█      ░█░ ░░   ░░ ░█░ ░█░ ░░░░░░ ░█░ ░░   ░░ ░█░ ░█░ ░░░░ ▓█ ░█░ ░░░░░░ ░█░ ░░░░ █▓ ░░░░░ ░▓▓██
+▒░█ ░░░ ▒░█ ▒░█ ░░░ ▒░█ ▒░█     ▄█▀      ▒░█         ▒░█ ▒░█        ▒░█         ▒░█ ▒░█     ▄█▀ ▒░█        ▒░█ ░░░░ ▓▒       ▒████
+▀▀▀     ▀▀▀ ▀▀▀     ▀▀▀ ▀▀▀▀▀▀▀▀▀        ▀▀▀         ▀▀▀  ▀▀▀▀▀▀▀▀▀ ▀▀▀         ▀▀▀ ▀▀▀▀▀▀▀▀▀    ▀▀▀▀▀▀▀▀▀ ▀▀▀      ▒░ ▀▀▀▀▀▀▀▀▀▀ 
+
+
+=========================================================
+Mahmoud Waleed Saad => ID:20250807 => Filters 1, 5 , 9 ,13
+
+Ahmed Ismail Omran => ID:20251006 => Filters 2, 6 , 10 , 14
+
+Ahmed Walid Badr => ID:20251035 => Filters 3, 7 , 11 , 15
+
+Mohammed Mokhtar Mohammed => ID:20251350 => Filters 4, 8 , 12, 16
+=======================================================================================
+
+Section name: Monday Library lab S15
+============================================
+
+*/
+
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include "Image_Class.h"
+
 using namespace std;
 
+// ================= Function Prototypes =================
 
+void Menu();
+
+void applyGreyscale(Image& image);
+
+void applyBlackandWhite(Image& image);
+
+void Invert_filter(Image& image);
+
+void Frame_Filter(Image& img);
+
+void addSimpleFrame(Image& img);
+
+void addFancyFrame(Image& img);
+
+void applyFlip(Image& image);
+
+void applyRotation(Image& image);
+
+void Darken_Lighten_filter(Image& image_to_filter);
+
+void Darkening_filter(Image& image_to_filter);
+
+void Lightening_filter(Image& image_to_filter);
+
+void resizeFilter(Image& image);
+
+// ================= Main =================
+
+int main()
+{
+    // ============ Inputting Image File ============
+
+string filename;
+
+Enter_Image:
+
+cout << "Enter the image filename - No Spaces: ";
+    cin >> filename;
+
+Image image(filename);
+
+if (image.channels < 3)
+    {
+        cout << "The image must be a colored RGB image.\n";
+        goto Enter_Image;
+    }
+
+// ============ Selecting Filter ============
+
+int choice;
+
+while (true)
+    {
+        Menu();
+
+cout << "Enter your choice: ";
+        cin >> choice;
+
+if (choice == 0)
+        {
+            cout << "Exiting the program... Goodbye!\n";
+            break;
+        }
+
+switch (choice)
+        {
+        case 1:
+            applyGreyscale(image);
+            break;
+
+case 2:
+            applyBlackandWhite(image);
+            break;
+
+case 3:
+            Invert_filter(image);
+            break;
+
+case 4:
+            Frame_Filter(image);
+            break;
+
+case 5:
+            applyFlip(image);
+            break;
+
+case 6:
+            applyRotation(image);
+            break;
+
+case 7:
+            Darken_Lighten_filter(image);
+            break;
+
+case 8:
+            resizeFilter(image);
+            break;
+
+default:
+            cout << "Invalid choice! Enter a number from 0 to 8.\n";
+            continue;
+        }
+
+// ============ Saving Filtered Image ============
+
+cout << "Enter the output image filename & Specify extension: ";
+
+string filtered_filename;
+        cin >> filtered_filename;
+
+if (image.saveImage(filtered_filename))
+        {
+            cout << "Image saved successfully.\n";
+        }
+        else
+        {
+            cout << "Failed to save the image.\n";
+        }
+    }
+
+return 0;
+}
 
 // ============= GreyScale: Filter 1 =============
 
-void applyGreyscale(Image& image) {
+void applyGreyscale(Image& image)
+{
     for (int i = 0; i < image.width; ++i) {
         for (int j = 0; j < image.height; ++j) {
             unsigned int average = 0;
@@ -21,7 +207,6 @@ void applyGreyscale(Image& image) {
             image(i, j, 0) = average;
             image(i, j, 1) = average;
             image(i, j, 2) = average;
-            // Grey is obtained when all RGB values for a pixel are equal and the degree differs according to the average obtained by ~ (R+G+B)/3
         }
     }
 }
@@ -29,8 +214,9 @@ void applyGreyscale(Image& image) {
 
 // =============== Black and White: Filter 2 ================
 
-void applyBlackandWhite(Image& image) {
-    for (int i=0; i<image.width; i++) {
+void applyBlackandWhite(Image& image)
+{
+        for (int i=0; i<image.width; i++) {
 
         for (int j=0; j<image.height; j++ ) {
 
@@ -61,7 +247,7 @@ void applyBlackandWhite(Image& image) {
 
 // ============= Invert: Filter 3 =============
 
-void Invert_filter(Image &image_to_filter) // image_to_filter is a variable created on the same memory address of image (alias to image) so different name won't matter here or in other functions
+void Invert_filter(Image& image_to_filter)
 {
     for (int i=0;i<image_to_filter.width;i++)
     {
@@ -69,17 +255,98 @@ void Invert_filter(Image &image_to_filter) // image_to_filter is a variable crea
         {
             for (int k=0;k<3;k++)
             {
-                image_to_filter(i,j,k)=255-image_to_filter(i,j,k); //Inverting colors is getting their 255's complement
+                image_to_filter(i,j,k)=255-image_to_filter(i,j,k);
             }
         }
     }
 }
+
 // ============= Frame: Filter 4 =============
 
+void addSimpleFrame(Image& img) {
+    int thickness;
+    cout << "Enter frame thickness: ";
+    cin >> thickness;
 
+    int r, g, b;
+    cin >> r >> g >> b;
 
+    for (int i = 0; i < img.width; ++i) {
+        for (int j = 0; j < img.height; ++j) {
+            
+            if (i < thickness || i >= img.width - thickness || 
+                j < thickness || j >= img.height - thickness) {
+                
+                img(i, j, 0) = r;
+                img(i, j, 1) = g;
+                img(i, j, 2) = b;
+            }
+        }
+    }
+}
+
+void addFancyFrame(Image& img) {
+    int thickness;
+    cout << "Enter frame thickness: ";
+    cin >> thickness;
+
+    int r, g, b;
+    cin >> r >> g >> b;
+
+    int gap = thickness / 2;        
+    int innerThickness = 2;         
+
+    for (int i = 0; i < img.width; ++i) {
+        for (int j = 0; j < img.height; ++j) {
+             
+              if (i < thickness || i >= img.width - thickness || 
+                j < thickness || j >= img.height - thickness) {
+                
+                img(i, j, 0) = r;
+                img(i, j, 1) = g;
+                img(i, j, 2) = b;
+            }
+            
+            int start = thickness + gap;
+            int endW = img.width - (thickness + gap);
+            int endH = img.height - (thickness + gap);
+
+            if ((i >= start && i < start + innerThickness) || (i < endW && i >= endW - innerThickness) ||
+                (j >= start && j < start + innerThickness) || (j < endH && j >= endH - innerThickness)) {
+                
+                if (i >= start && i < endW && j >= start && j < endH) {
+                    img(i, j, 0) = 255;
+                    img(i, j, 1) = 255;
+                    img(i, j, 2) = 255;
+                }
+            }
+        }
+    }
+}
+
+void Frame_Filter(Image &img)
+{
+    cout << "Choose Frame Type:" <<'\n' ;
+    cout << "1. Simple Frame" << '\n' ;
+    cout << "2. Fancy/Decorative Frame" << '\n' ;
+    cout << "Enter choice (1 or 2): ";
+
+    Frame_Choice:
+    int choice;
+    cin >> choice;
+
+    if (choice == 1) {
+        addSimpleFrame(img);
+    } else if (choice == 2) {
+        addFancyFrame(img);
+    } else {
+        cout << "Invalid choice!" << '\n' ;
+        goto Frame_Choice;
+    }
+}
 
 // ============= Flip: Filter 5 =============
+
 void applyFlip(Image &image) {
     int flip_choice;
     cout << "Enter 1 for horizontal flip or 2 for vertical flip: ";
@@ -110,12 +377,11 @@ void applyFlip(Image &image) {
 
 void applyRotation(Image &image) {
 
-    // Take the degree input from the user:
+    
     int degree;
     cout << "Enter the degree of rotation (90, 180, 270):" <<'\n';
     cin >> degree;
 
-    // Rotation 180 degree
     if (degree == 180) {
         for (int i=0;i<image.width;i++)
         {
@@ -126,7 +392,6 @@ void applyRotation(Image &image) {
                 int tempB = image.getPixel(i, j, 2);
 
                 for (int k=0;k<3;k++) {
-                    // الفكرة انك تطرح من ال pixel  الي بتوازيها الناحية التانية في الناحية التانية
                     image(i, j, k) = image(image.width-1-i, image.height-1-j, k);
                 }
 
@@ -187,7 +452,6 @@ void applyRotation(Image &image) {
 
 }
 
-
 // ============= Darken/Lighten: Filter 7 =============
 
 void Darkening_filter(Image &image_to_filter)
@@ -203,8 +467,7 @@ void Darkening_filter(Image &image_to_filter)
         {
             for (int k=0;k<3;k++)
             {
-                image_to_filter(i,j,k)*=1-(level/100.0f);//Decrease intensity of color, and so brightness of pixel, by [level%] times
-                //100.0f---> 100 treated as float, to save memory & keep precision during the arithmetic operations
+                image_to_filter(i,j,k)*=1-(level/100.0f);
             }
         }
     }
@@ -224,10 +487,8 @@ void Lightening_filter(Image &image_to_filter)
         {
             for (int k=0;k<3;k++)
             {
-                float changes_to_lighten=image_to_filter(i,j,k)*(1+(level/100.0f)); //Increase intensity of colors, and so brightness of pixel, by [level%] times
-                //100.0f---> 100 treated as float, and float to save memory & keep precision during the arithmetic operations
+                float changes_to_lighten=image_to_filter(i,j,k)*(1+(level/100.0f));
                 image_to_filter(i,j,k)=min(255.0f,changes_to_lighten);
-                // the maximum possible value for an unsigned char is 255
             }
         }
     }
@@ -248,74 +509,48 @@ void Darken_Lighten_filter(Image &image_to_filter)
 
 }
 
+// ============ Resize: Filter 8 ============
 
-//============== Filter 9 : merge images =====
+void resizeFilter(Image& image) {
+    int Width, Height;
+    cout << "Enter new width: ";
+    cin >> Width;
+    cout << "Enter new height: ";
+    cin >> Height;
 
+    if (Width <= 0 || Height <= 0) {
+        cout << "Fail!" << endl;
+        return;
+    }
 
-// ============= Crop: Filter 11 =============
+    Image resizedImage(Width, Height);
 
-// void Crop_filter(Image &image_to_filter)
-// {
-//     cout<<"Enter Crop starting point (x,y) respectively: ";
-//     starting_point:
-//     int x,y;
-//     cin>>x>>y;
-//     cout<<'\n';
-//     if (x<=0 || y<=0 || x > image_to_filter.width || y > image_to_filter.height)
-//     {
-//         cout<<"Enter valid starting coordinate: ";
-//         goto starting_point;
-//     }
-//
-//     cout<<"Enter the width & height of the rectangle to crop: ";
-//     cropping_rectangle:
-//     int w,h;
-//     cin>>w>>h;
-//     cout<<'\n';
-//     if (w<=0 || h<=0) // w=0 & h=0 means there is no pixels ---> no image
-//     {
-//         cout<<"Enter valid width and height: ";
-//         goto cropping_rectangle;
-//     }
-//     if (x+(w-1) > image_to_filter.width) // We have the width w = (pixel x) + (w-1 pixels)
-//     {
-//         w=image_to_filter.width-x; // [---------x--------------TotalWidth-----w] so make w the distance between x & TotalWidth
-//     }
-//     if (y+(h-1) > image_to_filter.height) // We have the height h = (pixel y) + (h-1 pixels)
-//     {
-//         h=image_to_filter.height-y; // [------y---------TotalHeight----h] so make h the distance between y & TotalHeight
-//     }
-//
-//
-//     Image cropped_image(w,h);
-//     for (int i=x;i<x+w;i++) // x here is 1 based
-//     {
-//         for (int j=y;j<y+h;j++) // y here is 1 based
-//         {
-//             for (int k=0;k<3;k++) cropped_image(i-x,j-y,k)=image_to_filter(i-1,j-1,k);
-//         }
-//     }
-//     image_to_filter=cropped_image;
-// }
+    for (int y = 0; y < Height; y++) {
+        for (int x = 0; x < Width; x++) {
+            
+            int oldX = x * image.width / Width;
+            int oldY = y * image.height / Height;
 
+            resizedImage(x, y, 0) = image(oldX, oldY, 0);
+            resizedImage(x, y, 1) = image(oldX, oldY, 1);
+            resizedImage(x, y, 2) = image(oldX, oldY, 2);
+        }
+    }
 
-// ============= Purple: Filter 15 =============
+    image = resizedImage;
+    cout << "Image resized successfully!" << endl;
+}
 
-// void Purple_Filter(Image &image_to_filter) {
-//     for (int i=0;i<image_to_filter.width;i++)
-//     {
-//         for (int j=0;j<image_to_filter.height;j++)
-//         {
-//             image_to_filter(i,j,1)=0; //Purple is the combination of Red and Blue so keep Green zero and the degrees of purple would form
-//         }
-//     }
-// }
+// =========== filter 9 :  ============
+
 
 
 // ============ Menu ============
-void Menu() {
+
+void Menu()
+{
     cout << "========================================\n";
-    cout << "         Image Filters Menu            \n";
+    cout << "         Image Filters Menu             \n";
     cout << "========================================\n";
     cout << "1 --> Greyscale\n";
     cout << "2 --> Black & White\n";
@@ -327,73 +562,4 @@ void Menu() {
     cout << "8 --> Resize\n";
     cout << "0 --> Exit\n";
     cout << "========================================\n";
-}
-
-int main() {
-// ============ Inputting Image File ============
-    string filename;
-    Enter_Image:
-    cout << "Enter the image filename - No Spaces: ";
-    getline(cin, filename);
-    Image image(filename);
-
-    if (image.channels < 3) {
-        cout << "The image must be a colored RGB image.\n";
-        goto Enter_Image;  // نرجع لإدخال الصورة بدل ما نقفل البرنامج
-    }
-
-    int choice;
-    while (true) {      // عملناها عشان الدكتور قال كل ما نقفل ال menu comes again
-        Menu();
-        cout << "Enter your choice: ";
-        cin >> choice;
-        if (choice == 0) {
-            cout << "Exiting the program... Goodbye!\n";
-            break;
-        }
-
-
-        switch (choice) {      // كل case هنضيف ال function اللي عملناها
-            case 1:
-                applyGreyscale(image);
-                break;
-            case 2:
-                applyBlackandWhite(image);
-                break;
-            case 3:
-                Invert_filter(image);
-                break;
-            case 4:
-                // DO: فلتر Frame
-                break;
-            case 5:
-                applyFlip(image);
-                break;
-            case 6:
-                 applyRotation(image);
-                break;
-            case 7:
-                Darken_Lighten_filter(image);
-                break;
-            case 8:
-                // DO: فلتر Resize
-                break;
-            default:
-                cout << "Invalid choice! Enter a number from 0 to 8.\n";
-                continue; // لو الاختيار مش من 1 لـ 8 نرجع نطبع المنيو بدل ما نقفل ال برنامج
-        }
-
-// ============ Saving Filtered Image ============
-        cout << "Enter the output image filename & Specify extension: ";  // الجزء ده خاص بكل الفلاتر محدش هيعدل عليه
-        cin.ignore();
-        string filtered_filename;
-        getline(cin, filtered_filename);
-        if (image.saveImage(filtered_filename)) {
-            cout << "Image saved successfully.\n";
-        }
-        else {
-            cout << "Failed to save the image.\n";
-        }
-    }
-    return 0;
 }
