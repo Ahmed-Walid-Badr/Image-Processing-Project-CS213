@@ -396,13 +396,70 @@ void resizeFilter(Image& image) {
 
 
 
+
+void EdgeDetection(Image &image) {
+    // applyGreyscale(image);
+
+    Image temp(image.width, image.height);
+
+    // Initialize the temp image all pixels= white
+    for (int i=0; i<temp.width; i++) {
+        for (int j=0; j<temp.height; j++) {
+            for (int k=0; k<3; k++) {
+                temp(i, j, k) = 255;
+            }
+        }
+    }
+
+
+    // Detect the edge in the original image:
+    for (int i=0; i<image.width-1; i++ ) {
+        for (int j=0; j<image.height-1; j++) {
+
+            int tempR = image.getPixel(i, j, 0);
+            int tempG = image.getPixel(i, j, 1);
+            int tempB = image.getPixel(i, j, 2);
+
+            int pixel_avg = (tempR + tempB + tempG) /3;
+
+            int tempR2 = image.getPixel(i+1, j, 0);
+            int tempG2 = image.getPixel(i+1, j, 1);
+            int tempB2 = image.getPixel(i+1, j, 2);
+
+
+            int pixel_avg2 = (tempR2 + tempB2 + tempG2) /3;
+
+
+            int tempR3 = image.getPixel(i, j+1, 0);
+            int tempG3 = image.getPixel(i, j+1, 1);
+            int tempB3 = image.getPixel(i, j+1, 2);
+
+            int pixel_avg3 = (tempR3 + tempB3 + tempG3) /3;
+
+
+            int threshold = 40;
+
+            if (abs(pixel_avg2 - pixel_avg) >= threshold || abs(pixel_avg3 - pixel_avg) >= threshold) {
+                for (int k=0; k<3; k++) {
+                    temp(i, j, k)  = 0;
+                }
+            }
+        }
+    }
+
+
+    image = temp;
+
+
+}
+
+
+
 // ============ Menu ============
 
 void Menu() {
     cout << "========================================\n";
-    cout << "========================================\n";
     cout << "         Image Filters Menu            \n";
-    cout << "========================================\n";
     cout << "========================================\n";
     cout << "1 --> Greyscale\n";
     cout << "2 --> Black & White\n";
@@ -412,6 +469,8 @@ void Menu() {
     cout << "6 --> Rotate\n";
     cout << "7 --> Darken / Lighten\n";
     cout << "8 --> Resize\n";
+    // Filter 9
+    cout << "10 --> Edge detection\n";
     cout << "0 --> Exit\n";
     cout << "========================================\n";
 }
@@ -467,8 +526,15 @@ int main() {
             case 8:
                 resizeFilter(image);
                 break;
+
+            // case 9
+
+            case 10:
+                EdgeDetection(image);
+                break;
+
             default:
-                cout << "Invalid choice! Enter a number from 0 to 8.\n";
+                cout << "Invalid choice! Enter a number from 0 to 10.\n";
                 continue;
         }
 
@@ -484,6 +550,8 @@ int main() {
         else {
             cout << "Failed to save the image.\n";
         }
+
+
     }
     return 0;
 }
