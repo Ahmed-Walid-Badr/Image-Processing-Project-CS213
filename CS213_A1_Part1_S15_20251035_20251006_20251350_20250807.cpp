@@ -21,7 +21,7 @@ The available filters are:
 This project is made by:
 Mahmoud Waleed Saad => ID:20250807 => Filters 1, 5
 
-Ahmed Ismail Omran => ID:20251006 => Filters 2, 6
+Ahmed Ismail Omran => ID:20251006 => Filters 2, 6, 10, 14
 
 Ahmed Walid Badr => ID:20251035 => Filters 3, 7
 
@@ -449,7 +449,20 @@ void EdgeDetection(Image &image) {
 
 
     image = temp;
+}
 
+
+void OldTV(Image &image) {
+
+    for (int i=0; i<image.width; i++) {
+        for (int j=0; j<image.height; j++) {
+            if (j%2) {
+                for (int k=0; k<3; k++) {
+                    image(i, j, k) = 0;
+                }
+            }
+        }
+    }
 
 }
 
@@ -471,6 +484,8 @@ void Menu() {
     cout << "8 --> Resize\n";
     // Filter 9
     cout << "10 --> Edge detection\n";
+    // Filters 11 -> 13
+    cout << "14 --> Old TV\n";
     cout << "0 --> Exit\n";
     cout << "========================================\n";
 }
@@ -533,8 +548,14 @@ int main() {
                 EdgeDetection(image);
                 break;
 
+            // cases 11 -> 13 ..........
+
+            case 14:
+                OldTV(image);
+                break;
+
             default:
-                cout << "Invalid choice! Enter a number from 0 to 10.\n";
+                cout << "Invalid choice! Enter a number from 0 to 16.\n";
                 continue;
         }
 
