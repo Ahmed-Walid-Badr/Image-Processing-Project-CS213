@@ -14,11 +14,14 @@ The available filters are:
 7 --> Darken / Lighten
 8 --> Resize
 
+
+
+
 =========================================================
 This project is made by:
 Mahmoud Waleed Saad => ID:20250807 => Filters 1, 5
 
-Ahmed Ismail Omran => ID:20251006 => Filters 2, 6
+Ahmed Ismail Omran => ID:20251006 => Filters 2, 6, 10, 14
 
 Ahmed Walid Badr => ID:20251035 => Filters 3, 7
 
@@ -120,10 +123,10 @@ void addSimpleFrame(Image& img) {
 
     for (int i = 0; i < img.width; ++i) {
         for (int j = 0; j < img.height; ++j) {
-            
-            if (i < thickness || i >= img.width - thickness || 
+
+            if (i < thickness || i >= img.width - thickness ||
                 j < thickness || j >= img.height - thickness) {
-                
+
                 img(i, j, 0) = r;
                 img(i, j, 1) = g;
                 img(i, j, 2) = b;
@@ -140,27 +143,27 @@ void addFancyFrame(Image& img) {
     int r, g, b;
     cin >> r >> g >> b;
 
-    int gap = thickness / 2;        
-    int innerThickness = 2;         
+    int gap = thickness / 2;
+    int innerThickness = 2;
 
     for (int i = 0; i < img.width; ++i) {
         for (int j = 0; j < img.height; ++j) {
-             
-              if (i < thickness || i >= img.width - thickness || 
+
+              if (i < thickness || i >= img.width - thickness ||
                 j < thickness || j >= img.height - thickness) {
-                
+
                 img(i, j, 0) = r;
                 img(i, j, 1) = g;
                 img(i, j, 2) = b;
             }
-            
+
             int start = thickness + gap;
             int endW = img.width - (thickness + gap);
             int endH = img.height - (thickness + gap);
 
             if ((i >= start && i < start + innerThickness) || (i < endW && i >= endW - innerThickness) ||
                 (j >= start && j < start + innerThickness) || (j < endH && j >= endH - innerThickness)) {
-                
+
                 if (i >= start && i < endW && j >= start && j < endH) {
                     img(i, j, 0) = 255;
                     img(i, j, 1) = 255;
@@ -224,7 +227,7 @@ void applyFlip(Image &image) {
 
 void applyRotation(Image &image) {
 
-    
+
     int degree;
     cout << "Enter the degree of rotation (90, 180, 270):" <<'\n';
     cin >> degree;
@@ -376,7 +379,7 @@ void resizeFilter(Image& image) {
 
     for (int y = 0; y < Height; y++) {
         for (int x = 0; x < Width; x++) {
-            
+
             int oldX = x * image.width / Width;
             int oldY = y * image.height / Height;
 
@@ -390,6 +393,78 @@ void resizeFilter(Image& image) {
     cout << "Image resized successfully!" << endl;
 }
 
+
+
+
+
+void EdgeDetection(Image &image) {
+    // applyGreyscale(image);
+
+    Image temp(image.width, image.height);
+
+    // Initialize the temp image all pixels= white
+    for (int i=0; i<temp.width; i++) {
+        for (int j=0; j<temp.height; j++) {
+            for (int k=0; k<3; k++) {
+                temp(i, j, k) = 255;
+            }
+        }
+    }
+
+
+    // Detect the edge in the original image:
+    for (int i=0; i<image.width-1; i++ ) {
+        for (int j=0; j<image.height-1; j++) {
+
+            int tempR = image.getPixel(i, j, 0);
+            int tempG = image.getPixel(i, j, 1);
+            int tempB = image.getPixel(i, j, 2);
+
+            int pixel_avg = (tempR + tempB + tempG) /3;
+
+            int tempR2 = image.getPixel(i+1, j, 0);
+            int tempG2 = image.getPixel(i+1, j, 1);
+            int tempB2 = image.getPixel(i+1, j, 2);
+
+
+            int pixel_avg2 = (tempR2 + tempB2 + tempG2) /3;
+
+
+            int tempR3 = image.getPixel(i, j+1, 0);
+            int tempG3 = image.getPixel(i, j+1, 1);
+            int tempB3 = image.getPixel(i, j+1, 2);
+
+            int pixel_avg3 = (tempR3 + tempB3 + tempG3) /3;
+
+
+            int threshold = 40;
+
+            if (abs(pixel_avg2 - pixel_avg) >= threshold || abs(pixel_avg3 - pixel_avg) >= threshold) {
+                for (int k=0; k<3; k++) {
+                    temp(i, j, k)  = 0;
+                }
+            }
+        }
+    }
+
+
+    image = temp;
+}
+
+
+void OldTV(Image &image) {
+
+    for (int i=0; i<image.width; i++) {
+        for (int j=0; j<image.height; j++) {
+            if (j%2) {
+                for (int k=0; k<3; k++) {
+                    image(i, j, k) = 0;
+                }
+            }
+        }
+    }
+
+}
 
 
 
@@ -407,13 +482,17 @@ void Menu() {
     cout << "6 --> Rotate\n";
     cout << "7 --> Darken / Lighten\n";
     cout << "8 --> Resize\n";
+    // Filter 9
+    cout << "10 --> Edge detection\n";
+    // Filters 11 -> 13
+    cout << "14 --> Old TV\n";
     cout << "0 --> Exit\n";
     cout << "========================================\n";
 }
 
 int main() {
 // ============ Inputting Image File ============
-    
+
     string filename;
     Enter_Image:
     cout << "Enter the image filename - No Spaces: ";
@@ -425,7 +504,7 @@ int main() {
         goto Enter_Image;
     }
 // ============ Selecting Filter ============
-    
+
     int choice;
     while (true) {
         Menu();
@@ -462,13 +541,26 @@ int main() {
             case 8:
                 resizeFilter(image);
                 break;
+
+            // case 9
+
+            case 10:
+                EdgeDetection(image);
+                break;
+
+            // cases 11 -> 13 ..........
+
+            case 14:
+                OldTV(image);
+                break;
+
             default:
-                cout << "Invalid choice! Enter a number from 0 to 8.\n";
+                cout << "Invalid choice! Enter a number from 0 to 16.\n";
                 continue;
         }
 
 // ============ Saving Filtered Image ============
-        
+
         cout << "Enter the output image filename & Specify extension: ";
         cin.ignore();
         string filtered_filename;
@@ -479,6 +571,8 @@ int main() {
         else {
             cout << "Failed to save the image.\n";
         }
+
+
     }
     return 0;
 }
