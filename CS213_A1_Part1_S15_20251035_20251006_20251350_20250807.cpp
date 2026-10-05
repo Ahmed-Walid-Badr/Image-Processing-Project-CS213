@@ -14,6 +14,9 @@ The available filters are:
 7 --> Darken / Lighten
 8 --> Resize
 
+
+
+
 =========================================================
 This project is made by:
 Mahmoud Waleed Saad => ID:20250807 => Filters 1, 5
@@ -396,6 +399,7 @@ void resizeFilter(Image& image) {
 // ============ Menu ============
 
 void Menu() {
+    cout << "========================================\n";
     cout << "========================================\n";
     cout << "         Image Filters Menu            \n";
     cout << "========================================\n";
