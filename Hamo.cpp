@@ -4,17 +4,23 @@
 
 using namespace std;
 
-void applyInfraredFilter(Image& img) {
-    for (int i = 0; i < img.width; i++) {
-        for (int j = 0; j < img.height; j++) {
-            
-            img(i, j, 0) = 255;
-            
-            img(i, j, 1) = 255 - img(i, j, 1);
-            
-            img(i, j, 2) = 255 - img(i, j, 2);
+void BlurFilter(Image& img) {
+    Image blurred = img;
+
+    for (int i = 1; i < img.width - 1; i++) {
+        for (int j = 1; j < img.height - 1; j++) {
+            for (int k = 0; k < 3; k++) { 
+                
+               int sum = img(i - 1, j - 1, k) + img(i - 1, j, k) + img(i - 1, j + 1, k) +
+                          img(i, j - 1, k)     + img(i, j, k)     + img(i, j + 1, k)     +
+                          img(i + 1, j - 1, k) + img(i + 1, j, k) + img(i + 1, j + 1, k);
+
+                blurred(i, j, k) = sum / 9;
+            }
         }
     }
+
+    img = blurred;
 }
 
 int main() {
@@ -24,14 +30,13 @@ int main() {
 
     Image img(filename);
 
-    applyInfraredFilter(img);
+    BlurFilter(img);
 
     string saveName;
     cout << "Enter output image name to save: ";
     cin >> saveName;
     img.saveImage(saveName);
 
-    cout << "Filter applied and image saved successfully!" << endl;
 
     return 0;
 }
