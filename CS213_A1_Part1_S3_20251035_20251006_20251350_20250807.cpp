@@ -142,7 +142,7 @@ void Purple_Filter(Image &image_to_filter)
     {
         for (int j=0;j<image_to_filter.height;j++)
         {
-            image_to_filter(i,j,1)=0; //Purple is the combination of Red and Blue so keep Green zero and the degrees of purple would form
+            image_to_filter(i,j,1)*=0.64; //Purple is the combination of Red and Blue so keep Green zero and the degrees of purple would form
         }
     }
 }
