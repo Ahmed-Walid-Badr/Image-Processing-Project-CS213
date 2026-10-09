@@ -13,23 +13,32 @@ The available filters are:
 6 --> Rotate
 7 --> Darken / Lighten
 8 --> Resize
+9 --> Merge Images
+10 --> Detect Edges
+11 --> Crop
+12 --> Blur
+13 --> Sunlight
+14 --> OldTV
+15 --> Purple
+16 --> Infrared
+17 --> Image Skewing
+18 --> Oil Painting
 
-
-
-
-=========================================================
 This project is made by:
-Mahmoud Waleed Saad => ID:20250807 => Filters 1, 5
+
+* Main 16 Filters:
+Mahmoud Waleed Saad => ID:20250807 => Filters 1, 5, 9, 13
 
 Ahmed Ismail Omran => ID:20251006 => Filters 2, 6, 10, 14
 
-Ahmed Walid Badr => ID:20251035 => Filters 3, 7
+Ahmed Walid Badr => ID:20251035 => Filters 3, 7, 11, 15
 
-Mohammed Mokhtar Mohammed => ID:20251350 => Filters 4, 8
-==========================================================
+Mohammed Mokhtar Mohammed => ID:20251350 => Filters 4, 8, 12, 16
 
-Section name: Monday Library lab S15
-============================================
+* Bonus:
+Filters 17, 18 | GUI Prototype => Mahmoud Waleed Saad => ID:20250807
+
+GUI => Ahmed Ismail Omran => ID:20251006 & Ahmed Walid Badr => ID:20251035
 
 */
 
@@ -195,6 +204,7 @@ void Frame_Filter(Image &img)
     }
 }
 
+
 // ============= Flip: Filter 5 =============
 
 void applyFlip(Image &image) {
@@ -222,6 +232,7 @@ void applyFlip(Image &image) {
         cout << "Invalid choice! Please enter either 1 or 2.\n";
     }
 }
+
 
 // ============= Rotate Filter: Filter 6 =============
 
@@ -394,8 +405,75 @@ void resizeFilter(Image& image) {
 }
 
 
+// ============ Merge: Filter 9 ============
+
+void merge(Image &image) {
+
+    string filename2;
+    cout << "Pls enter the second image name to merge with the first image: ";
+    cin >> filename2;
+
+    Image image2(filename2);
+
+    if (image2.channels < 3) {
+        cout << "The second image must have at least 3 channels (RGB) to merge." << endl;
+        return;
+    }
+
+    int choice;
+    cout << "1 --> Merge Using the biggest dimensions\n";
+    cout << "2 --> Merge Using the smallest dimensions\n";
+    cout << "Enter your choice: ";
+    cin >> choice;
+
+    if (choice == 1) {
+        int newWidth = max(image.width,image2.width);
+        int newHeight = max(image.height,image2.height);
+
+        Image result(newWidth, newHeight);
+
+        for (int i = 0; i< newWidth;i++) {
+            for (int j = 0; j < newHeight; j++) {
+                bool inImage1 = (i < image.width && j < image.height);
+                bool inImage2 = (i < image2.width && j < image2.height);
+
+                if (inImage1 && inImage2) {
+                    for (int k = 0; k < 3; k++) {
+                        result(i, j, k) = (image(i, j, k) + image2(i, j, k)) / 2;
+                    }
+                } else if (inImage1) {
+                    for (int k = 0; k < 3; k++) {
+                        result(i, j, k) = image(i, j, k);
+                    }
+                } else if (inImage2) {
+                    for (int k = 0; k < 3; k++) {
+                        result(i, j, k) = image2(i, j, k);
+                    }
+                }
+            }
+        }
+        image = result;
+    } else if (choice == 2) {
+        int newWidth = min(image.width,image2.width);
+        int newHeight = min(image.height,image2.height);
+
+        Image result(newWidth, newHeight);
+
+        for (int i = 0; i< newWidth;i++) {
+            for (int j = 0; j < newHeight; j++) {
+                for (int k = 0; k < 3; k++) {
+                    result(i, j, k) = (image(i, j, k) + image2(i, j, k)) / 2;
+                }
+            }
+        }
+        image = result;
+    } else {
+        cout << "Invalid choice. Please select either 1 or 2." << endl;
+    }
+}
 
 
+// ============ Edge Detection: Filter 10 ============
 
 void EdgeDetection(Image &image) {
     // applyGreyscale(image);
@@ -452,8 +530,81 @@ void EdgeDetection(Image &image) {
 }
 
 
-void OldTV(Image &image) {
+// ============ Crop: Filter 11 ============
 
+void Crop_filter(Image &image_to_filter)
+{
+    cout<<"Enter Crop starting point (x,y) respectively: ";
+    starting_point:
+    int x,y;
+    cin>>x>>y;
+    cout<<'\n';
+    if (x<=0 || y<=0 || x > image_to_filter.width || y > image_to_filter.height)
+    {
+        cout<<"Enter valid starting coordinate: ";
+        goto starting_point;
+    }
+
+    cout<<"Enter the width & height of the rectangle to crop: ";
+    cropping_rectangle:
+    int w,h;
+    cin>>w>>h;
+    cout<<'\n';
+    if (w<=0 || h<=0) // w=0 & h=0 means there is no pixels ---> no image
+    {
+        cout<<"Enter valid width and height: ";
+        goto cropping_rectangle;
+    }
+    if (x+(w-1) > image_to_filter.width) // We have the width w = (pixel x) + (w-1 pixels)
+    {
+        w=image_to_filter.width-x; // [---------x--------------TotalWidth-----w] so make w the distance between x & TotalWidth
+    }
+    if (y+(h-1) > image_to_filter.height) // We have the height h = (pixel y) + (h-1 pixels)
+    {
+        h=image_to_filter.height-y; // [------y---------TotalHeight----h] so make h the distance between y & TotalHeight
+    }
+
+
+    Image cropped_image(w,h);
+    for (int i=x;i<x+w;i++) // x here is 1 based
+    {
+        for (int j=y;j<y+h;j++) // y here is 1 based
+        {
+            for (int k=0;k<3;k++) cropped_image(i-x,j-y,k)=image_to_filter(i-1,j-1,k);
+        }
+    }
+    image_to_filter=cropped_image;
+}
+
+
+// ============ Sunlight: Filter 13 ============
+
+void Sunlight(Image &image) {
+    for (int i = 0; i < image.width ;i++) {
+        for (int j = 0; j < image.height; j++) {
+            for (int k = 0; k < 3 ; k++) {
+
+                int Red = image(i,j,k) + 20;
+                int Green = image(i,j,k) + 10;
+                int Blue = image(i,j,k) - 10;
+
+                Red = min(255, Red);
+                Green = min(255, Green);
+                Blue = max(0, Blue);
+
+                image(i,j,0) = Red;
+                image(i,j,1) = Green;
+                image(i,j,2) = Blue;
+            }
+        }
+    }
+}
+
+
+// ============ OldTV: Filter 14 ============
+
+void OldTV(Image &image)
+{
     for (int i=0; i<image.width; i++) {
         for (int j=0; j<image.height; j++) {
             if (j%2) {
@@ -463,8 +614,126 @@ void OldTV(Image &image) {
             }
         }
     }
-
 }
+
+
+// ============ Purple: Filter 15 ============
+
+void Purple_Filter(Image &image_to_filter)
+{
+    for (int i=0;i<image_to_filter.width;i++)
+    {
+        for (int j=0;j<image_to_filter.height;j++)
+        {
+            image_to_filter(i,j,1)*=0.64; //Purple is the combination of Red and Blue so keep Green zero and the degrees of purple would form
+        }
+    }
+}
+
+
+// ============ Infrared: Filter 16 ============
+
+void applyInfraredFilter(Image& img) {
+    for (int i = 0; i < img.width; i++) {
+        for (int j = 0; j < img.height; j++) {
+            img(i, j, 0) = 255;
+
+            img(i, j, 1) = 255 - img(i, j, 1);
+
+            img(i, j, 2) = 255 - img(i, j, 2);
+        }
+    }
+}
+
+
+// ============ Skew: Filter 17 ============
+
+void Skewing(Image &image) {
+
+    cout<<"Enter the angle of the skew in degrees: ";
+    double angle;
+    cin>>angle;
+    double radian = angle * M_PI / 180.0;
+
+    int width = image.width;
+    int height = image.height;
+
+    int newHeight = height + abs(radian * (width - 1));
+
+    Image Skewing(width, newHeight);
+
+    for (int x = 0; x < width; x++) {
+        for (int y = 0; y < newHeight; y++) {
+            for (int k = 0; k < 3; k++) {
+                Skewing(x, y, k) = 255; // Initialize to White
+            }
+        }
+    }
+
+    for (int x = 0 ;x < width;x++) {
+        for (int y = 0; y < height; y++) {
+            int newY = y + (radian * x);
+            if (newY >= 0 && newY < newHeight) {
+                for (int k = 0; k < 3; k++) {
+                    Skewing(x, newY, k) = image(x, y, k);
+                }
+            }
+        }
+    }
+
+    image = Skewing;
+}
+
+
+// ============ Oil Painting: Filter 18 ============
+
+void oilPainting(Image &image) {
+    int radius = 4;
+    int levels = 20;
+
+    for (int x = 0; x < image.width; x++) {
+        for (int y = 0; y < image.height; y++) {
+
+            int count[20] = {0};
+            int sumR[20] = {0};
+            int sumG[20] = {0};
+            int sumB[20] = {0};
+
+            for (int dx = -radius; dx <= radius; dx++) {
+                for (int dy = -radius; dy <= radius; dy++) {
+                    int nx = x + dx;
+                    int ny = y + dy;
+
+                    if (nx < 0 || nx >= image.width || ny < 0 || ny >= image.height)
+                        continue;
+
+                    int r = image.getPixel(nx, ny, 0);
+                    int g = image.getPixel(nx, ny, 1);
+                    int b = image.getPixel(nx, ny, 2);
+
+                    int intensity = (r + g + b) / 3;
+                    int bin = intensity * levels / 256;
+
+                    count[bin]++;
+                    sumR[bin] += r;
+                    sumG[bin] += g;
+                    sumB[bin] += b;
+                }
+            }
+
+            int best = 0;
+            for (int i = 1; i < levels; i++) {
+                if (count[i] > count[best])
+                    best = i;
+            }
+
+            image.setPixel(x, y, 0, sumR[best] / count[best]);
+            image.setPixel(x, y, 1, sumG[best] / count[best]);
+            image.setPixel(x, y, 2, sumB[best] / count[best]);
+        }
+    }
+}
+
 
 
 
@@ -482,10 +751,16 @@ void Menu() {
     cout << "6 --> Rotate\n";
     cout << "7 --> Darken / Lighten\n";
     cout << "8 --> Resize\n";
-    // Filter 9
-    cout << "10 --> Edge detection\n";
-    // Filters 11 -> 13
-    cout << "14 --> Old TV\n";
+    cout << "9 --> Merge Images\n";
+    cout << "10 --> Detect Edges\n";
+    cout << "11 --> Crop\n";
+    cout << "12 --> Blur\n";
+    cout << "13 --> Sunlight\n";
+    cout << "14 --> OldTV\n";
+    cout << "15 --> Purple\n";
+    cout << "16 --> Infrared\n";
+    cout << "17 --> Image Skewing\n";
+    cout << "18 --> Oil Painting\n";
     cout << "0 --> Exit\n";
     cout << "========================================\n";
 }
@@ -541,21 +816,38 @@ int main() {
             case 8:
                 resizeFilter(image);
                 break;
-
-            // case 9
-
+            case 9:
+                merge(image);
+                break;
             case 10:
                 EdgeDetection(image);
                 break;
-
-            // cases 11 -> 13 ..........
-
-            case 14:
-                OldTV(image);
+            case 11:
+                Crop_filter(image);
                 break;
-
+            case 12:
+                //Blur
+                break;
+            case 13:
+                Sunlight(image);
+                break;
+            case 14:
+                 OldTV(image);
+                 break;
+            case 15:
+                 Purple_Filter(image);
+                 break;
+            case 16:
+                 applyInfraredFilter(image);
+                 break;
+            case 17:
+                 Skewing(image);
+                 break;
+            case 18:
+                 oilPainting(image);
+                 break;
             default:
-                cout << "Invalid choice! Enter a number from 0 to 16.\n";
+                cout << "Invalid choice! Enter a number from 0 to 8.\n";
                 continue;
         }
 
@@ -571,8 +863,6 @@ int main() {
         else {
             cout << "Failed to save the image.\n";
         }
-
-
     }
     return 0;
 }
