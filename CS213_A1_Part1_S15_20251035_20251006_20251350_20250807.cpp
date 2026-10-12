@@ -9,7 +9,7 @@ The available filters are:
 2 --> Black & White
 3 --> Invert Image
 4 --> Frame
-5 --> Flip
+5 --> Flip 
 6 --> Rotate
 7 --> Darken / Lighten
 8 --> Resize
