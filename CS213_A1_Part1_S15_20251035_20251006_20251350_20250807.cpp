@@ -648,40 +648,34 @@ void applyInfraredFilter(Image& img) {
 
 // ============ Skew: Filter 17 ============
 
-void Skewing(Image &image) {
-
-    cout<<"Enter the angle of the skew in degrees: ";
-    double angle;
-    cin>>angle;
+void Skewing_Pixels(Image& image, Image& result, double angle) {
     double radian = angle * M_PI / 180.0;
+    double tanValue = tan(radian)  * 0.5; // Adjusting the skew factor for better visual effect
+    int skewness = floor(image.height * tanValue);
 
-    int width = image.width;
+    int newwidth = image.width + abs(skewness);
     int height = image.height;
 
-    int newHeight = height + abs(radian * (width - 1));
+    Image skewed(newwidth, height);
 
-    Image Skewing(width, newHeight);
-
-    for (int x = 0; x < width; x++) {
-        for (int y = 0; y < newHeight; y++) {
-            for (int k = 0; k < 3; k++) {
-                Skewing(x, y, k) = 255; // Initialize to White
-            }
-        }
-    }
-
-    for (int x = 0 ;x < width;x++) {
+    for (int x = 0; x < newwidth; x++) {
         for (int y = 0; y < height; y++) {
-            int newY = y + (radian * x);
-            if (newY >= 0 && newY < newHeight) {
-                for (int k = 0; k < 3; k++) {
-                    Skewing(x, newY, k) = image(x, y, k);
-                }
+            for (int k = 0; k < 3; k++) {
+                skewed(x, y, k) = 255; // Initialize to White
             }
         }
     }
 
-    image = Skewing;
+    for (int y = 0; y < height; y++) {
+        int shift = static_cast<int>((image.height - 1 - y) * tanValue);
+        for (int x = 0; x < image.width; x++) {
+            for (int k = 0; k < 3; k++) {
+                skewed(x + shift, y, k) = image(x, y, k);
+            }
+        }
+    }
+
+    result = skewed;
 }
 
 
