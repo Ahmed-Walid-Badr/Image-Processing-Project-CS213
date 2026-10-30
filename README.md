@@ -7,15 +7,15 @@
 # 👥 Credits
 
 * Main 16 Filters:
-> Mahmoud Waleed Saad => ID:20250807 => Filters 1, 5, 9, 13
+  > Mahmoud Waleed Saad => ID:20250807 => Filters 1, 5, 9, 13
 
-> Ahmed Ismail Omran => ID:20251006 => Filters 2, 6, 10, 14
+  > Ahmed Ismail Omran => ID:20251006 => Filters 2, 6, 10, 14
 
-> Ahmed Walid Badr => ID:20251035 => Filters 3, 7, 11, 15
+  > Ahmed Walid Badr => ID:20251035 => Filters 3, 7, 11, 15
 
-> Mohammed Mokhtar Mohammed => ID:20251350 => Filters 4, 8, 12, 16
+  > Mohammed Mokhtar Mohammed => ID:20251350 => Filters 4, 8, 12, 16
 
 * Bonus:
-> Filters 17, 18 | GUI Prototype => Mahmoud Waleed Saad => ID:20250807
+  > Filters 17, 18 | GUI Prototype => Mahmoud Waleed Saad => ID:20250807
 
-> GUI => Ahmed Ismail Omran => ID:20251006 & Ahmed Walid Badr => ID:20251035
+  > GUI => Ahmed Ismail Omran => ID:20251006 & Ahmed Walid Badr => ID:20251035
