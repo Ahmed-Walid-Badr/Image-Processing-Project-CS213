@@ -5,7 +5,7 @@
 **📷 Filters:<br>1 --> Greyscale<br>2 --> Black & White<br>3 --> Invert Image<br>4 --> Frame<br>5 --> Flip <br>6 --> Rotate<br> 7 --> Darken / Lighten<br>8 --> Resize<br> 9 --> Merge Images<br>10 --> Detect Edges<br>11 --> Crop<br>12 --> Blur<br>13 --> Sunlight<br>14 --> OldTV<br>15 --> Purple<br>16 --> Infrared<br>17 --> Image Skewing<br>18 --> Oil Painting<br>**
 
 # How to Download
-## Download the .zip file (Phascinate) & you will find the source code for the Filers & the GUI
+## Download the .zip file (Phascinate) & you will find the source code for the Filters & the GUI
 
 # 👥 Credits
 
