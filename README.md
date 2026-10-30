@@ -1,7 +1,6 @@
 # Project Discription:
 ## This project was required by Dr.Mohammed EL-Ramly for assignment one for Object Oriented Programming course (CS213).
-## It is for image processing which the user can upload any image using its file name with extensions like :(.jpg, .bmp, .png, ....etc)
-## and the user can save the image filtered with a customized file name and extension.
+## It is for image processing which the user can upload any image using its file name with extensions like :(.jpg, .bmp, .png, ....etc)<br>and the user can save the image filtered with a customized file name and extension.
 <br>
 # Filters:
 1 --> Greyscale<br>
