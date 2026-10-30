@@ -4,25 +4,25 @@
 ## and the user can save the image filtered with a customized file name and extension.
 <br>
 # Filters:
-## 1 --> Greyscale
-## 2 --> Black & White
-## 3 --> Invert Image
-## 4 --> Frame
-## 5 --> Flip 
-## 6 --> Rotate
-## 7 --> Darken / Lighten
-## 8 --> Resize
-## 9 --> Merge Images
-## 10 --> Detect Edges
-## 11 --> Crop
-## 12 --> Blur
-## 13 --> Sunlight
-## 14 --> OldTV
-## 15 --> Purple
-## 16 --> Infrared
-## 17 --> Image Skewing
-## 18 --> Oil Painting
-
+1 --> Greyscale<br>
+2 --> Black & White<br>
+3 --> Invert Image<br>
+4 --> Frame<br>
+5 --> Flip <br>
+6 --> Rotate<br>
+7 --> Darken / Lighten<br>
+8 --> Resize<br>
+9 --> Merge Images<br>
+10 --> Detect Edges<br>
+11 --> Crop<br>
+12 --> Blur<br>
+13 --> Sunlight<br>
+14 --> OldTV<br>
+15 --> Purple<br>
+16 --> Infrared<br>
+17 --> Image Skewing<br>
+18 --> Oil Painting<br>
+<br>
 # Credits
 
 * Main 16 Filters:
