@@ -1,11 +1,22 @@
-# 📝 Project Discription:
+<img width="1885" height="380" alt="image" src="https://github.com/user-attachments/assets/9f0ab6d4-dbf7-4d8c-a760-ca8c6b62d45a" /># 📝 Project Discription:
 ## This project was required by Dr.Mohammed EL-Ramly for assignment one for Object Oriented Programming course (CS213).
 ## It is for image processing which the user can upload any image using its file name with extensions like :(.jpg, .bmp, .png, ....etc) and the user can save the image filtered with a customized file name and extension.
 
 **📷 Filters:<br>1 --> Greyscale<br>2 --> Black & White<br>3 --> Invert Image<br>4 --> Frame<br>5 --> Flip <br>6 --> Rotate<br> 7 --> Darken / Lighten<br>8 --> Resize<br> 9 --> Merge Images<br>10 --> Detect Edges<br>11 --> Crop<br>12 --> Blur<br>13 --> Sunlight<br>14 --> OldTV<br>15 --> Purple<br>16 --> Infrared<br>17 --> Image Skewing<br>18 --> Oil Painting<br>**
 
-# How to Download
-## Download the .zip file (Phascinate) & you will find the source code for the Filters & the GUI
+# ⬇️ How to Download
+* ## The Package [Ready-to-Run Version]
+  ### Press Phascinate_Program.7z --> Press the download button --> Extract the file --> run the .exe file
+  <img width="1885" height="380" alt="Screenshot 2026-11-11 165819(1)" src="https://github.com/user-attachments/assets/315e8c91-e096-44f8-aef8-e94b21234acb" />
+
+
+  
+* ## The Source Code [Debugging/Development Version]
+  ### Press Phascinate_src.zip --> Press the download button --> Extract the file --> Follow the README.txt instructions
+  <img width="1885" height="708" alt="Screenshot 2026-11-11 171308(1)" src="https://github.com/user-attachments/assets/b491868e-352a-4393-beb4-c0ee1acea5f2" />
+  
+
+
 
 # 👥 Credits
 
