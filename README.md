@@ -1,4 +1,4 @@
-<img width="1885" height="380" alt="image" src="https://github.com/user-attachments/assets/9f0ab6d4-dbf7-4d8c-a760-ca8c6b62d45a" /># 📝 Project Discription:
+# 📝 Project Discription:
 ## This project was required by Dr.Mohammed EL-Ramly for assignment one for Object Oriented Programming course (CS213).
 ## It is for image processing which the user can upload any image using its file name with extensions like :(.jpg, .bmp, .png, ....etc) and the user can save the image filtered with a customized file name and extension.
 
