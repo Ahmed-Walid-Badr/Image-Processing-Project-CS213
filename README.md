@@ -6,12 +6,12 @@
 
 # ⬇️ How to Download
 * ## The Package [Ready-to-Run Version]
-  #### Press "Phascinate" in the "Releases" section --> Press Phascinate_Program.7z -->  Extract the downloaded file --> run the .exe file (skip the Microsoft Defender's pop-up)
+  #### 1) Press "Phascinate" in the "Releases" section<br>2) Press Phascinate_Program.7z<br>3)  Extract the downloaded file<br>4) run the .exe file (skip the Microsoft Defender's pop-up)
 
 
   
 * ## The Source Code [Debugging/Development Version]
-  #### Press "Phascinate" in the "Releases" section --> Press Source Code (zip/tar.gz)  --> Extract the downloaded file --> Extract the Phascinate_src.zip file --> Follow the README.txt instructions
+  #### 1) Press "Phascinate" in the "Releases" section<br>2) Press Source Code (zip/tar.gz)<br>3) Extract the downloaded file<br>4) Extract the Phascinate_src.zip file<br>5) Follow the README.txt instructions
   
 # 👥 Credits
 
