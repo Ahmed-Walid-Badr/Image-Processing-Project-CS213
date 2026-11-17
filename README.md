@@ -6,18 +6,13 @@
 
 # ⬇️ How to Download
 * ## The Package [Ready-to-Run Version]
-  ### Press Phascinate_Program.7z --> Press the download button --> Extract the file --> run the .exe file
-  <img width="1885" height="380" alt="Screenshot 2026-11-11 165819(1)" src="https://github.com/user-attachments/assets/315e8c91-e096-44f8-aef8-e94b21234acb" />
+  #### 1) Press "Phascinate" in the "Releases" section<br>2) Press Phascinate_Program.7z<br>3)  Extract the downloaded file<br>4) run the .exe file (skip the Microsoft Defender's pop-up)
 
 
   
 * ## The Source Code [Debugging/Development Version]
-  ### Press Phascinate_src.zip --> Press the download button --> Extract the file --> Follow the README.txt instructions
-  <img width="1885" height="708" alt="Screenshot 2026-11-11 171308(1)" src="https://github.com/user-attachments/assets/b491868e-352a-4393-beb4-c0ee1acea5f2" />
+  #### 1) Press "Phascinate" in the "Releases" section<br>2) Press Source Code (zip/tar.gz)<br>3) Extract the downloaded file<br>4) Extract the Phascinate_src.zip file<br>5) Follow the README.txt instructions
   
-
-
-
 # 👥 Credits
 
 * Main 16 Filters:
