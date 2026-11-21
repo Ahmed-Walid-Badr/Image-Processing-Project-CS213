@@ -24,6 +24,6 @@
   > Mohammed Mokhtar Mohammed => Filters 4, 8, 12, 16 
 
   > GUI
-     * Mahmoud Waleed Saad => GUI Prototype
-     * Ahmed Ismail Omran => v1.0.0
-     * Ahmed Walid Badr => v2.0.0
+  >  * Mahmoud Waleed Saad => GUI Prototype
+  >  * Ahmed Ismail Omran => v1.0.0
+  >  * Ahmed Walid Badr => v2.0.0
