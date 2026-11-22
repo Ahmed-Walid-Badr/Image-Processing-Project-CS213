@@ -26,5 +26,6 @@
   > GUI
   >   * Mahmoud Waleed Saad => GUI Prototype
   >   * Ahmed Ismail Omran => v1.0.0
-  >   * Ahmed Walid Badr => v2.0.0
+  >   * Ahmed Walid Badr => v2.0.0<br>
+  
   > App icon in v1.0–v1.1 by KP Arts from Flaticon for versions v1.0.0 - v1.1.0
